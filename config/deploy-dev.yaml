@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: gto-front-container
-          image: docker.pkg.github.com/gtoru/front/front:latest
+          image: docker.pkg.github.com/gtoru/front/front
           ports:
             - containerPort: 80
           imagePullPolicy: Always
