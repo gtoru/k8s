@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gto-front-deployment
+spec:
+  selector:
+    matchLabels:
+      app: gto-front
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: gto-front
+    spec:
+      containers:
+        - name: gto-front-container
+          image: docker.pkg.github.com/gtoru/front/front:latest
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gto-front-svc
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: gto-front
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gto-front-ingress
+spec:
+  rules:
+    - host: gto.kohea.tel
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: gto-front-svc
+              servicePort: 80

@@ -1,0 +1,22 @@
+name: "Deploy Kubernetes DEV cluster"
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/deploy-dev.yaml
+      - config/deploy-dev.yaml
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure k8s
+        run: echo ${{ secrets.KUBECONFIG }} > ~/.kube/config
+      - name: Add Github-token as secret
+        run: kubectl create secret docker-registry regcred --docker-server=docker.pkg.github.com --docker-username=gtoru --docker-password=${{ secrets.GITHUB_TOKEN }}
+      - name: Apply configuration
+        run: kubectl apply -f config/deploy-dev.yaml
