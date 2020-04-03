@@ -15,7 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Configure k8s
-        run: echo ${{ secrets.KUBECONFIG }} > ~/.kube/config
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+        run: 'echo "$KUBECONFIG" > ~/.kube/config'
       - name: Add Github-token as secret
         run: kubectl create secret docker-registry regcred --docker-server=docker.pkg.github.com --docker-username=gtoru --docker-password=${{ secrets.GITHUB_TOKEN }}
       - name: Apply configuration
