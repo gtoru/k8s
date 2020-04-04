@@ -38,7 +38,8 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: gto-front
+    app: gto
+    tier: frontend
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
