@@ -14,13 +14,13 @@ jobs:
     name: Deploy
     steps:
       - uses: actions/checkout@v2
-      - name: Create config folder
-        run: mkdir ~/.kube
+      - name: Set gto-dev namespace for kubectl
+        run: kubectl config set-context --current --namespace=gto-dev
       - name: Configure k8s
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
-        run: 'echo "$KUBECONFIG" > ~/.kube/config'
+        run: 'mkdir ~/.kube && echo "$KUBECONFIG" > ~/.kube/config'
       - name: Add Github-token as secret
-        run: kubectl create secret docker-registry regcred --docker-server=docker.pkg.github.com --docker-username=gtoru --docker-password=${{ secrets.GITHUB_TOKEN }}
+        run: kubectl create secret docker-registry regcred --namespace=gto-dev --docker-server=docker.pkg.github.com --docker-username=gtoru --docker-password=${{ secrets.GITHUB_TOKEN }}
       - name: Apply configuration
         run: kubectl apply -f config/deploy-dev.yaml
