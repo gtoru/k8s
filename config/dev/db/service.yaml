@@ -32,6 +32,9 @@ spec:
           envFrom:
             - configMapRef:
                 name: gto-db-config
+          env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: gto-db
