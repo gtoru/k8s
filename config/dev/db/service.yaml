@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gto-db
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gto
+        tier: db
+        kind: db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:12.2
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "2Gi"
+            requests:
+              cpu: "50m"
+              memory: "200Mi"
+          envFrom:
+            - configMapRef:
+                name: gto-db-config
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: gto-db
+      volumes:
+        - name: gto-db
+          persistentVolumeClaim:
+            claimName: gto-db-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gto-db-svc
+  labels:
+    app: gto
+    tier: db
+    kind: service
+spec:
+  type: NodePort
+  ports:
+    - port: 5432
+  selector:
+    app: gto
+    tier: db
+    kind: db

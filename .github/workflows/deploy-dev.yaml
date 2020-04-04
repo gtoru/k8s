@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - .github/workflows/deploy-dev.yaml
-      - config/deploy-dev.yaml
+      - config/dev/**/*
 
 jobs:
   deploy_job:
@@ -24,5 +24,10 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: kubectl get secrets gto-regcred || kubectl create secret docker-registry gto-regcred --namespace=gto-dev --docker-server=docker.pkg.github.com --docker-username=gtoru --docker-password=$ACCESS_TOKEN
-      - name: Apply configuration
-        run: kubectl apply -f config/deploy-dev.yaml
+      - name: Apply Front configuration
+        run: kubectl apply -f config/dev/front.yaml
+      - name: Apply DB configuration
+        run: |
+          kubectl apply -f config/dev/db/configmap.yaml 
+          kubectl apply -f config/dev/db/volume.yaml
+          kubectl apply -f config/dev/db/service.yaml
