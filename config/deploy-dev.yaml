@@ -22,8 +22,11 @@ spec:
           imagePullPolicy: Always
           resources:
             limits:
-              cpu: "250m"
-              memory: "64Mi"
+              cpu: "100m"
+              memory: "50Mi"
+            requests:
+              cpu: "10m"
+              memory: "5Mi"
       imagePullSecrets:
         - name: gto-regcred
 ---
