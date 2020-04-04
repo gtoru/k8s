@@ -1,9 +1,14 @@
-apiVersion: extensions/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gto-db
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: gto
+      tier: db
+      kind: db
   template:
     metadata:
       labels:
