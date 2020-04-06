@@ -54,7 +54,10 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 5432
+    - name: gto-db-svc
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
   selector:
     app: gto
     tier: db
