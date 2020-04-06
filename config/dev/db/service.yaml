@@ -52,7 +52,7 @@ metadata:
     tier: db
     kind: service
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 5432
   selector:

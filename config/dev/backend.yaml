@@ -16,7 +16,12 @@ spec:
     spec:
       containers:
         - name: gto-back-container
-          image: docker.pkg.github.com/gtoru/back/back
+          image: docker.pkg.github.com/gtoru/server/server
+          env:
+            - name: DB__Host
+              value: gto-db-svc
+            - name: DB__Port
+              value: "5432"
           ports:
             - containerPort: 80
           imagePullPolicy: Always
