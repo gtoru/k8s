@@ -32,6 +32,18 @@ spec:
             requests:
               cpu: "25m"
               memory: "50Mi"
+          livenessProbe:
+            httpGet:
+              path: /_status/alive
+              port: 8080
+            initialDelaySeconds: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /_status/ready
+              port: 8080
+            initialDelaySeconds: 3
+            timeoutSeconds: 5
       imagePullSecrets:
         - name: gto-regcred
 ---
