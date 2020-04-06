@@ -58,7 +58,6 @@ spec:
       port: 5432
       protocol: TCP
       targetPort: 5432
-      nodePort: null
   selector:
     app: gto
     tier: db
