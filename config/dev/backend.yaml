@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gto-back-deployment
+spec:
+  selector:
+    matchLabels:
+      app: gto
+      tier: backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: gto
+        tier: backend
+    spec:
+      containers:
+        - name: gto-back-container
+          image: docker.pkg.github.com/gtoru/back/back
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "250m"
+              memory: "500Mi"
+            requests:
+              cpu: "25m"
+              memory: "50Mi"
+      imagePullSecrets:
+        - name: gto-regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gto-back-svc
+spec:
+  selector:
+    app: gto
+    tier: backend
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gto-back-ingress
+spec:
+  rules:
+    - host: gto.kohea.tel
+      http:
+        paths:
+          - path: /api
+            backend:
+              serviceName: gto-back-svc
+              servicePort: 80
+          - path: /docs
+            backend:
+              serviceName: gto-back-svc
+              servicePort: 80
