@@ -12,6 +12,15 @@ jobs:
     if: github.event.comment.user.login == 'madetara' && github.event.comment.body == 'Deploy DEV'
     name: Deploy DEV
     steps:
+      - name: Notify
+        uses: jungwinter/comment@v1
+        id: create
+        with:
+          type: create
+          body: "Deploying DEV cluster"
+          issue_number: github.event.issue.number
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/checkout@v2
       - name: Configure k8s
         env:
