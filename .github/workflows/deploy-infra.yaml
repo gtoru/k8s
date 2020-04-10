@@ -19,10 +19,6 @@ jobs:
         run: 'mkdir ~/.kube && echo "$KUBECONFIG" > ~/.kube/config'
       - name: Set infra namespace for kubectl
         run: kubectl config set-context --current --namespace=infra
-      - name: Add access-token as secret
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: kubectl get secrets gto-regcred || kubectl create secret docker-registry gto-regcred --namespace=gto-dev --docker-server=docker.pkg.github.com --docker-username=gtoru --docker-password=$ACCESS_TOKEN
       - name: Apply Prometheus configuration
         run: |
           kubectl apply -f config/dev/infra/prometheus/clusterRole.yaml
