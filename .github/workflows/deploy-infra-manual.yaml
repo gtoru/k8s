@@ -29,6 +29,6 @@ jobs:
         run: kubectl config set-context --current --namespace=infra
       - name: Apply Prometheus configuration
         run: |
-          kubectl apply -f config/dev/infra/prometheus/clusterRole.yaml
-          kubectl apply -f config/dev/infra/prometheus/config.yaml
-          kubectl apply -f config/dev/infra/prometheus/deployment.yaml
+          kubectl apply -f config/infra/prometheus/clusterRole.yaml
+          kubectl apply -f config/infra/prometheus/config.yaml
+          kubectl apply -f config/infra/prometheus/deployment.yaml
