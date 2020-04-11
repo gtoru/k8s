@@ -34,4 +34,4 @@ jobs:
       - name: Apply Grafana configuration
         run: |
           kubectl apply -f config/infra/grafana/datasource.yaml
-          kubectl apply -f config/infra/grafana/deployment.yamll
+          kubectl apply -f config/infra/grafana/deployment.yaml
