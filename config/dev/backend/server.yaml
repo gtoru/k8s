@@ -60,15 +60,15 @@ spec:
               name: gto-load-balance-config
             - mountPath: /var/log/nginx
               name: log
-          volumes:
-            - name: gto-load-balance-config
-              configMap:
-                name: gto-load-balance-config
-                items:
-                  - key: nginx.conf
-                    path: nginx.conf
-            - name: log
-              emptyDir: {}
+      volumes:
+        - name: gto-load-balance-config
+          configMap:
+            name: gto-load-balance-config
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+        - name: log
+          emptyDir: {}
       imagePullSecrets:
         - name: gto-regcred
 ---
