@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - config/dev/infra/**/*
+      - .github/workflows/deploy-infra.yaml
 
 jobs:
   deploy_job:
