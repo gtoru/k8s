@@ -18,6 +18,12 @@ jobs:
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: 'mkdir ~/.kube && echo "$KUBECONFIG" > ~/.kube/config'
+      - name: Set system namespace for kubectl
+        run: kubectl config set-context --current --namespace=kube-system
+      - name: Apply kube-state configuration
+        run: |
+          kubectl apply -f config/infra/kube-state/clusterRole.yaml
+          kubectl apply -f config/infra/kube-state/deployment.yaml
       - name: Set infra namespace for kubectl
         run: kubectl config set-context --current --namespace=infra
       - name: Apply Prometheus configuration
@@ -25,3 +31,7 @@ jobs:
           kubectl apply -f config/infra/prometheus/clusterRole.yaml
           kubectl apply -f config/infra/prometheus/config.yaml
           kubectl apply -f config/infra/prometheus/deployment.yaml
+      - name: Apply Grafana configuration
+        run: |
+          kubectl apply -f config/infra/grafana/datasource.yaml
+          kubectl apply -f config/infra/grafana/deployment.yamll
