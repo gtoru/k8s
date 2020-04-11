@@ -46,22 +46,7 @@ metadata:
 spec:
   selector:
     app: prometheus-server
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 8080
       targetPort: 9090
-      nodePort: 30000
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: prometheus-ingress
-spec:
-  rules:
-    - host: prometheus.kohea.tel
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: prometheus-service
-              servicePort: 8080
