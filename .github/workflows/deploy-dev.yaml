@@ -32,4 +32,6 @@ jobs:
       - name: Apply Front configuration
         run: kubectl apply -f config/dev/front.yaml
       - name: Apply Back configuration
-        run: kubectl apply -f config/dev/backend.yaml
+        run: |
+          kubectl apply -f config/dev/backend/balancer.yaml
+          kubectl apply -f config/dev/backend/server.yaml

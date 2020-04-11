@@ -44,6 +44,32 @@ spec:
               port: 8080
             initialDelaySeconds: 3
             timeoutSeconds: 5
+        - name: gto-back-balancer
+          image: nginx:1.17.9-alpine
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "100Mi"
+            requests:
+              cpu: "10m"
+              memory: "10Mi"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /etc/nginx
+              readonly: true
+              name: nginx-conf
+            - mountPath: /var/log/nginx
+              name: log
+          volumes:
+            - name: gto-load-balance-config
+              configMap:
+                name: gto-load-balance-config
+                items:
+                  - key: nginx.conf
+                    path: nginx.conf
+            - name: log
+              emptyDir: {}
       imagePullSecrets:
         - name: gto-regcred
 ---
@@ -57,7 +83,7 @@ spec:
     tier: backend
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 80
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
