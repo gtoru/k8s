@@ -57,8 +57,7 @@ spec:
             - containerPort: 80
           volumeMounts:
             - mountPath: /etc/nginx
-              readonly: true
-              name: nginx-conf
+              name: gto-load-balance-config
             - mountPath: /var/log/nginx
               name: log
           volumes:
