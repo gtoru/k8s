@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - config/dev/infra/**/*
+      - config/infra/**/*
       - .github/workflows/deploy-infra.yaml
 
 jobs:
