@@ -1,36 +1,3 @@
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: prometheus-volume
-  namespace: monitoring
-  labels:
-    scope: monitoring
-    tier: storage
-    kind: volume
-    app: prometheus
-spec:
-  storageClassName: hcloud-volumes
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: grafana-volume
-  namespace: monitoring
-  labels:
-    scope: monitoring
-    tier: storage
-    kind: volume
-    app: grafana
-spec:
-  storageClassName: hcloud-volumes
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -45,12 +12,6 @@ spec:
   storageClassName: hcloud-volumes
   accessModes:
     - ReadWriteOnce
-  selector:
-    matchLabels:
-      scope: monitoring
-      tier: storage
-      kind: volume
-      app: grafana
   resources:
     requests:
       storage: 10Gi
@@ -68,12 +29,6 @@ spec:
   storageClassName: hcloud-volumes
   accessModes:
     - ReadWriteOnce
-  selector:
-    matchLabels:
-      scope: monitoring
-      tier: storage
-      kind: volume
-      app: prometheus
   resources:
     requests:
       storage: 10Gi
