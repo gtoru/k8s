@@ -6,10 +6,11 @@ metadata:
   labels:
     scope: monitoring
     tier: storage
+    kind: volume
 spec:
   storageClassName: hcloud-volumes
   capacity:
-    storage: 10Gi
+    storage: 20Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -28,9 +29,14 @@ spec:
   storageClassName: hcloud-volumes
   accessModes:
     - ReadWriteOnce
+  selector:
+    matchLabels:
+      scope: monitoring
+      tier: storage
+      kind: volume
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -45,6 +51,11 @@ spec:
   storageClassName: hcloud-volumes
   accessModes:
     - ReadWriteOnce
+  selector:
+    matchLabels:
+      scope: monitoring
+      tier: storage
+      kind: volume
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi
