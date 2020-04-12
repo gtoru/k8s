@@ -33,6 +33,9 @@ spec:
             - mountPath: /etc/grafana/provisioning/datasources
               name: grafana-datasources
               readOnly: false
+      securityContext:
+        runAsUser: 472
+        runAsNonRoot: true
       volumes:
         - name: grafana-storage
           persistentVolumeClaim:
