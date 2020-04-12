@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus-deployment
-  namespace: infra
+  namespace: monitoring
 spec:
   replicas: 1
   selector:
@@ -31,15 +31,15 @@ spec:
           configMap:
             defaultMode: 420
             name: prometheus-server-conf
-
         - name: prometheus-storage-volume
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: prometheus-volume-claim
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: prometheus-service
-  namespace: infra
+  namespace: monitoring
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "9090"

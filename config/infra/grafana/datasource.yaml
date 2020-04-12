@@ -2,20 +2,28 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-datasources
-  namespace: infra
+  namespace: monitoring
 data:
   prometheus.yaml: |-
     {
         "apiVersion": 1,
         "datasources": [
             {
-               "access":"proxy",
-                "editable": true,
-                "name": "prometheus",
-                "orgId": 1,
-                "type": "prometheus",
-                "url": "http://prometheus-service.infra.svc:8080",
-                "version": 1
+              "access":"proxy",
+              "editable": true,
+              "name": "prometheus",
+              "orgId": 1,
+              "type": "prometheus",
+              "url": "http://prometheus-service.monitoring.svc:8080",
+              "version": 1
+            },
+            {
+              "access": "proxy",
+              "editable": true,
+              "name": "rancher-prometheus",
+              "orgId": 1,
+              "type": "prometheus",
+              "url": "http://prometheus-operated.cattle-prometheus.svc:8080"
             }
         ]
     }

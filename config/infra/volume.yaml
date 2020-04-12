@@ -1,0 +1,48 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: monitoring-volume
+  namespace: monitoring
+  labels:
+    scope: monitoring
+    tier: storage
+spec:
+  storageClassName: hcloud-volumes
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: grafana-volume-claim
+  labels:
+    app: grafana
+    tier: monitoring
+    kind: claim
+spec:
+  storageClassName: hcloud-volumes
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: prometheus-volume-claim
+  labels:
+    app: prometheus
+    tier: monitoring
+    kind: claim
+spec:
+  storageClassName: hcloud-volumes
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
