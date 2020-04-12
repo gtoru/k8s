@@ -20,14 +20,14 @@ jobs:
         run: 'mkdir ~/.kube && echo "$KUBECONFIG" > ~/.kube/config'
       - name: Set system namespace for kubectl
         run: kubectl config set-context --current --namespace=kube-system
-      - name: Prepare PVC
-        run: kubectl apply -f config/infra/volume.yaml
       - name: Apply kube-state configuration
         run: |
           kubectl apply -f config/infra/kube-state/clusterRole.yaml
           kubectl apply -f config/infra/kube-state/deployment.yaml
       - name: Set infra namespace for kubectl
-        run: kubectl config set-context --current --namespace=infra
+        run: kubectl config set-context --current --namespace=monitoring
+      - name: Prepare PVC
+        run: kubectl apply -f config/infra/volume.yaml
       - name: Apply Prometheus configuration
         run: |
           kubectl apply -f config/infra/prometheus/clusterRole.yaml

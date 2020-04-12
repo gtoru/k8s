@@ -19,6 +19,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: grafana-volume-claim
+  namespace: monitoring
   labels:
     app: grafana
     tier: monitoring
@@ -35,6 +36,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: prometheus-volume-claim
+  namespace: monitoring
   labels:
     app: prometheus
     tier: monitoring
