@@ -35,3 +35,5 @@ jobs:
         run: |
           kubectl apply -f config/dev/backend/balancer.yaml
           kubectl apply -f config/dev/backend/server.yaml
+      - name: Apply balancer
+        run: kubectl apply -f config/dev/ingress.yaml
