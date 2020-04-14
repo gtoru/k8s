@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gto-ingress
+spec:
+  rules:
+    - host: gto.kohea.tel
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: gto-front-svc
+              servicePort: 80
+          - path: /api
+            backend:
+              serviceName: gto-back-svc
+              servicePort: 80
+          - path: /docs
+            backend:
+              serviceName: gto-back-svc
+              servicePort: 80

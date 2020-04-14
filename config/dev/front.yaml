@@ -43,17 +43,3 @@ spec:
   selector:
     app: gto
     tier: frontend
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: gto-front-ingress
-spec:
-  rules:
-    - host: gto.kohea.tel
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: gto-front-svc
-              servicePort: 80

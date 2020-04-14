@@ -83,21 +83,3 @@ spec:
   ports:
     - port: 80
       targetPort: 80
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: gto-back-ingress
-spec:
-  rules:
-    - host: gto.kohea.tel
-      http:
-        paths:
-          - path: /api
-            backend:
-              serviceName: gto-back-svc
-              servicePort: 80
-          - path: /docs
-            backend:
-              serviceName: gto-back-svc
-              servicePort: 80
