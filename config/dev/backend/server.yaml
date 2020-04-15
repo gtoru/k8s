@@ -94,3 +94,5 @@ spec:
   ports:
     - port: 80
       targetPort: 80
+    - port: 9100
+      targetPort: 4040
