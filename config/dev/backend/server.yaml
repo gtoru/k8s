@@ -71,6 +71,8 @@ spec:
           volumeMounts:
             - name: log
               mountPath: logs
+            - name: gto-nginx-scrapper-config
+              mountPath: /etc/prometheus-nginxlog-exporter.hcl
       volumes:
         - name: gto-load-balance-config
           configMap:
@@ -80,6 +82,12 @@ spec:
                 path: nginx.conf
         - name: log
           emptyDir: {}
+        - name: gto-nginx-scrapper-config
+          configMap:
+            name: gto-nginx-scrapper-config
+            items:
+              - key: prometheus-nginxlog-exporter.hcl
+                path: prometheus-nginxlog-exporter.hcl
       imagePullSecrets:
         - name: gto-regcred
 ---

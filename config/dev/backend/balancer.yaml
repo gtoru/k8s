@@ -12,11 +12,12 @@ data:
     }
     http {
       log_format  main
-              'remote_addr:$remote_addr\t'
-              'method:$request_method\t'
-              'uri:$request_uri\t'
-              'host:$host\t'
-              'status:$status\t'
+              '[$time_iso8601] '
+              'remote_addr:$remote_addr '
+              'method:$request_method '
+              'uri:$request_uri '
+              'host:$host '
+              'status:$status '
               'request_time:$request_time';
 
       limit_req_zone $binary_remote_addr zone=backend:10m rate=100r/s;
@@ -41,3 +42,20 @@ data:
         server localhost:8080;
       }
     }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gto-nginx-scrapper-config
+data:
+  prometheus-nginxlog-exporter.hcl: |
+  namespace "app1" {
+    format = "[$time_iso8601] remote_addr:$remote_addr method:$request_method uri:$request_uri host:$host status:$status request_time:$request_time"
+
+    labels {
+      app = "gto-backend"
+      environment = "dev"
+    }
+
+    histogram_buckets = [.005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10]
+  }
