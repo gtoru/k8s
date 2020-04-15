@@ -49,7 +49,7 @@ metadata:
   name: gto-nginx-scrapper-config
 data:
   prometheus-nginxlog-exporter.hcl: |
-    namespace "gto-backend" {
+    namespace "gto_backend" {
       format = "[$time_iso8601] remote_addr:$remote_addr method:$request_method uri:$request_uri host:$host status:$status request_time:$request_time"
 
       source {
@@ -59,7 +59,7 @@ data:
       }
 
       labels {
-        app = "gto-backend"
+        app = "gto_backend"
         environment = "dev"
       }
 
