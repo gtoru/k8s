@@ -62,7 +62,8 @@ spec:
               name: log
         - name: gto-nginx-scrapper
           image: quay.io/martinhelmich/prometheus-nginxlog-exporter:v1.4.1
-          args: ["-config-file", "/etc/prometheus-nginxlog-exporter.hcl"]
+          args:
+            ["-config-file", "/etc/scrapper/prometheus-nginxlog-exporter.hcl"]
           resources:
             limits:
               cpu: "10m"
@@ -73,7 +74,7 @@ spec:
             - name: log
               mountPath: /var/log/nginx
             - name: gto-nginx-scrapper-config
-              mountPath: /etc
+              mountPath: /etc/scrapper
       volumes:
         - name: gto-load-balance-config
           configMap:
