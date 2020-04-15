@@ -60,6 +60,17 @@ spec:
               name: gto-load-balance-config
             - mountPath: /var/log/nginx
               name: log
+        - name: gto-nginx-scrapper
+          image: quay.io/martinhelmich/prometheus-nginxlog-exporter:1.4.1
+          resources:
+            limits:
+              cpu: "10m"
+              memory: "10Mi"
+          ports:
+            - containerPort: 4040
+          volumeMounts:
+            - name: log
+              mountPath: logs
       volumes:
         - name: gto-load-balance-config
           configMap:
