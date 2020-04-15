@@ -92,7 +92,9 @@ spec:
     app: gto
     tier: backend
   ports:
-    - port: 80
+    - name: backend
+      port: 80
       targetPort: 80
-    - port: 9100
+    - name: nginx-scrapper
+      port: 9100
       targetPort: 4040
