@@ -62,6 +62,7 @@ spec:
               name: log
         - name: gto-nginx-scrapper
           image: quay.io/martinhelmich/prometheus-nginxlog-exporter:v1.4.1
+          args: ["-config-file", "/etc/prometheus-nginxlog-exporter.hcl"]
           resources:
             limits:
               cpu: "10m"
