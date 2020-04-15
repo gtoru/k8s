@@ -61,7 +61,7 @@ spec:
             - mountPath: /var/log/nginx
               name: log
         - name: gto-nginx-scrapper
-          image: quay.io/martinhelmich/prometheus-nginxlog-exporter:1.4.1
+          image: quay.io/martinhelmich/prometheus-nginxlog-exporter:v1.4.1
           resources:
             limits:
               cpu: "10m"
