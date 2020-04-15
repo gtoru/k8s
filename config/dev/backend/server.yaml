@@ -70,9 +70,9 @@ spec:
             - containerPort: 4040
           volumeMounts:
             - name: log
-              mountPath: logs
+              mountPath: /var/log/nginx
             - name: gto-nginx-scrapper-config
-              mountPath: /etc/prometheus-nginxlog-exporter.hcl
+              mountPath: /etc
       volumes:
         - name: gto-load-balance-config
           configMap:
