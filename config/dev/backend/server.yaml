@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: gto-back-deployment
   annotations:
+    prometheus.io/scrape: "true"
     prometheus.io/should_be_probed: "true"
 spec:
   selector:
