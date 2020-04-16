@@ -8,6 +8,8 @@ spec:
   selector:
     matchLabels:
       app: prometheus-server
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -26,8 +28,6 @@ spec:
               mountPath: /etc/prometheus/
             - name: prometheus-storage-volume
               mountPath: /prometheus/
-      strategy:
-        type: Recreate
       securityContext:
         runAsUser: 1000
         runAsNonRoot: true

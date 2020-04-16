@@ -20,7 +20,7 @@ data:
             {
               "access": "proxy",
               "editable": true,
-              "name": "rancher-prometheus",
+              "name": "RANCHER_MONITORING",
               "orgId": 1,
               "type": "prometheus",
               "url": "http://prometheus-operated.cattle-prometheus.svc:8080"
