@@ -2,9 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gto-back-deployment
-  annotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/should_be_probed: "true"
 spec:
   selector:
     matchLabels:
@@ -16,6 +13,9 @@ spec:
       labels:
         app: gto
         tier: backend
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/should_be_probed: "true"
     spec:
       containers:
         - name: gto-back-container
