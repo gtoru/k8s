@@ -40,3 +40,8 @@ data:
       scrape_interval: 5s
       kubernetes_sd_configs:
       - role: service
+
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_should_be_probed]
+        action: keep
+        regex: true
