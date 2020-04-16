@@ -10,3 +10,17 @@ data:
   POSTGRES_DB: gto-db
   POSTGRES_USER: gto-db-user
   POSTGRES_PASSWORD: gto-db-password
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gto-db-metrics-config
+  labels:
+    app: gto
+    tier: db-metrics
+    kind: config
+data:
+  DATA_SOURCE_URI: localhost:5432
+  DATA_SOURCE_USER: gto-db-user
+  DATA_SOURCE_PASS: gto-db-password
+  PG_EXPORTER_WEB_LISTEN_ADDRESS: :9100

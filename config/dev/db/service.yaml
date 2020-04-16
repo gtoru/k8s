@@ -11,6 +11,9 @@ spec:
       kind: db
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/should_be_probed: "true"
       labels:
         app: gto
         tier: db
@@ -38,6 +41,19 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: gto-db
+        - name: postgres-metrics
+          image: wrouesnel/postgres_exporter:v0.8.0
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: "10m"
+              memory: "10Mi"
+          envFrom:
+            - configMapRef:
+                name: gto-db-metrics-config
+          ports:
+            - name: metrics-db
+              containerPort: 9100
       volumes:
         - name: gto-db
           persistentVolumeClaim:
