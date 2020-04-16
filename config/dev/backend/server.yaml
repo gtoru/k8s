@@ -25,7 +25,7 @@ spec:
             - name: DB__Port
               value: "5432"
           ports:
-            - name: metrics-backend
+            - name: metrics-server
               containerPort: 8080
           imagePullPolicy: Always
           resources:
@@ -72,7 +72,7 @@ spec:
               cpu: "10m"
               memory: "10Mi"
           ports:
-            - name: metrics-balancer
+            - name: metrics-nginx
               containerPort: 4040
           volumeMounts:
             - name: log
