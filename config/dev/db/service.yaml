@@ -45,6 +45,8 @@ spec:
         - name: postgres-metrics
           image: wrouesnel/postgres_exporter:v0.8.0
           imagePullPolicy: IfNotPresent
+          args:
+            - "--disable-settings-metrics"
           resources:
             limits:
               cpu: "10m"
