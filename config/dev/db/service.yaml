@@ -52,8 +52,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: gto-db-metrics-config
-          args:
-            - "--auto-discover-databases"
           ports:
             - name: metrics-db
               containerPort: 9100
