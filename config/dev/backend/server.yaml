@@ -48,6 +48,11 @@ spec:
               port: 8080
             initialDelaySeconds: 3
             timeoutSeconds: 5
+          lifecycle:
+            preStop:
+              httpGet:
+                path: "/_control/stop"
+                port: 8080
         - name: gto-back-balancer
           image: nginx:1.17.9-alpine
           resources:
