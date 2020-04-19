@@ -1,15 +1,14 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: prometheus-deployment
   namespace: monitoring
 spec:
+  serviceName: prometheus
   replicas: 1
   selector:
     matchLabels:
       app: prometheus-server
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
