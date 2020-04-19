@@ -28,6 +28,8 @@ jobs:
         run: kubectl config set-context --current --namespace=monitoring
       - name: Prepare PVC
         run: kubectl apply -f config/infra/volume.yaml
+      - name: Apply Piraeus
+        run: kubectl apply -f config/infra/piraeus.yaml
       - name: Apply Prometheus configuration
         run: |
           kubectl apply -f config/infra/prometheus/clusterRole.yaml
